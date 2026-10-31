@@ -13,12 +13,12 @@ CREATE TABLE cliente (
     telefone   VARCHAR(20)  NULL,
     email      VARCHAR(100) NULL,
     endereco   VARCHAR(200) NULL
-) ENGINE=InnoDB;
+);
 
 CREATE TABLE categoria (
     id_categoria   INT AUTO_INCREMENT PRIMARY KEY,
     nome_categoria VARCHAR(50) NOT NULL UNIQUE
-) ENGINE=InnoDB;
+);
 
 CREATE TABLE doce (
     id_doce      INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,7 +27,7 @@ CREATE TABLE doce (
     nome         VARCHAR(100) NOT NULL,
     preco        DECIMAL(10,2) NOT NULL,
     CHECK (preco >= 0)
-) ENGINE=InnoDB;
+);
 
 CREATE TABLE pedido (
     id_pedido    INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,7 +36,7 @@ CREATE TABLE pedido (
     data_entrega DATETIME NULL,
     status       VARCHAR(20) NOT NULL,
     valor_total  DECIMAL(10,2) NOT NULL DEFAULT 0.00
-) ENGINE=InnoDB;
+);
 
 CREATE TABLE item_pedido (
     id_item        INT AUTO_INCREMENT PRIMARY KEY,
@@ -46,7 +46,7 @@ CREATE TABLE item_pedido (
     preco_unitario DECIMAL(10,2) NOT NULL,
     subtotal       DECIMAL(10,2) NOT NULL,
     CHECK (quantidade > 0)
-) ENGINE=InnoDB;
+);
 
 CREATE TABLE pagamento (
     id_pagamento     INT AUTO_INCREMENT PRIMARY KEY,
@@ -54,7 +54,7 @@ CREATE TABLE pagamento (
     forma_pagamento  VARCHAR(30) NOT NULL,
     valor            DECIMAL(10,2) NOT NULL,
     status_pagamento VARCHAR(20) NOT NULL
-) ENGINE=InnoDB;
+);
 
 -- Chaves estrangeiras
 

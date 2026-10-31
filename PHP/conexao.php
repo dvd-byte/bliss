@@ -1,7 +1,7 @@
 <?php
 
 $host = "localhost"
-$banco = ""
+$banco = "bd_bliss"
 $usuario = "root"
 $senha = ""
 

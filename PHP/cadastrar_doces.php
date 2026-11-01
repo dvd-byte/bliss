@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 $nome      = trim($_POST["nome"] ?? "");
 $preco     = trim((string) ($_POST["preco"] ?? ""));
+$descricao = trim($_POST["descricao"] ?? "");
 $categoria = trim($_POST["categoria"] ?? "");
 
 // Aceita vírgula como separador decimal (ex.: 10,50)
@@ -28,6 +29,8 @@ if ($nome === "") {
     $erro = "Preço inválido. Use um valor como 10.50.";
 } elseif (mb_strlen($categoria, "UTF-8") > 50) {
     $erro = "A categoria deve ter no máximo 50 caracteres.";
+} elseif (mb_strlen($descricao, "UTF-8") > 255) {
+    $erro = "A descrição deve ter no máximo 255 caracteres.";
 }
 
 if ($erro !== null) {
@@ -80,14 +83,15 @@ try {
 
     $stmt = $pdo->prepare(
         "INSERT INTO doce
-         (nome, preco, id_categoria)
+         (nome, preco, descricao, id_categoria)
          VALUES
-         (:nome, :preco, :id_categoria)"
+         (:nome, :preco, :descricao, :id_categoria)"
     );
 
     $stmt->execute([
         ":nome"         => $nome,
         ":preco"        => $preco,
+        ":descricao"    => $descricao,
         ":id_categoria" => $id_categoria
     ]);
 

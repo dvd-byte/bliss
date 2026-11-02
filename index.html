@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://db.onlinewebfonts.com/c/20e48b2ec8c64b2a1ceb5b28d9bcc9d0?family=Bryndan+Write" rel="stylesheet">
+</head>
+<body>
+    
+    <header>
+        <img src="imagens/mainlogo.svg" alt="logo">
+        <nav>
+            <ul>
+                <li><button data-acao="inicio">Início</button></li>
+                <li><button data-acao="brigadeiros">Brigadeiros</button></li>
+                <li><button data-acao="cones">Cones</button></li>
+                <li><button data-acao="doPo">Doces de pote</button></li>
+                <li><button data-acao="especiais">Especiais</button></li>
+            </ul>
+        </nav>
+        <div class="botões">
+            <button id="abrir-usuario" type="button" aria-label="Abrir minha conta" aria-controls="painel-usuario" aria-expanded="false">
+                <img src="imagens/user.svg" alt="">
+            </button>
+            <button onclick="abrir()" id="abrir-carrinho" type="button" aria-label="Abrir carrinho">
+                <img src="imagens/truck-side.svg" alt="">
+                <span id="aviso-carrinho" hidden aria-hidden="true"></span>
+            </button>
+            <button>
+                <img src="imagens/menu-burge.png" alt="b">
+            </button>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="inicio deslizarCarrossel" data-hero="inicio">
+            <img src="imagens/mainlogo2.svg" alt="logo principal da bliss gourmet">
+        </section>
+
+        <!--Primeiro Carrossel: Brigadeiros-->
+        <section class="hero" data-hero="brigadeiros">
+            <div class="left">
+                <p class="alter2">Garanta já <br> o seu!</p>
+                <img src="imagens/bolahero1.jpeg" alt="circulo hero1">
+            </div>
+
+            <div class="center">
+                <div class="principal">
+                    <img class="doce1" src="imagens/brigadeiro.png" alt="doce1">
+                    <div class="indicadores">
+                        <div class="bola ativa"></div>
+                        <div class="bola"></div>
+                        <div class="bola"></div>
+                    </div>
+                </div>
+                <span>Imagem meramente ilustrativa*</span>
+            </div>
+
+            <div class="right">
+                <h1>Brigadeiros Deliciosos! <br> </h1>
+                <p>Agora com três opções: <br> <strong> Tradicional, Gourmet </strong> e <strong> Personalizado </strong></p>
+                <button id="botãobr"data-doce="brigadeiro">Garanta o seu!</button>
+            </div>
+        </section>
+
+        <section class="opçõesbr escondido">
+
+            <div class="container" id="cont1" data-tipo="tradicional">
+                <h2>Tradicional</h2>
+                <img src="imagens/tradicional.png" alt="brigadeiro">
+                <p>→ Tamanho padrão</p>
+            </div>
+
+            <div class="container" id="cont2" data-tipo="gourmet">
+                <h2>Gourmet</h2>
+                <img src="imagens/gourmet.png" alt="gourmet" style="width: 300px; height: 300px; align-self: center; filter: brightness(0) saturate(100%) invert(100%) sepia(80%);">
+                <p>→ Em tamanho maior</p>
+            </div>
+
+            <div class="container" id="cont3" data-tipo="personalizado">
+                <h2>Personalizados</h2>
+                <img src="imagens/personalizado.png" alt="personalizado">
+                <p>→ Personalize do seu jeito</p>
+            </div>
+
+        </section>
+
+        <section class="saboresbr escondido">
+            <div class="divisão">
+                <div class="card">
+                    <img src="imagens/Brigadeirocard.png" alt="">
+                    <div>
+                        <h3>Brigadeiro</h3>
+                        <p>R$2,50 por unidade</p>
+                        <button class="add" id="chocolate">Adicionar</button>
+                    </div>                    
+                </div>
+                <div class="card">
+                    <img src="imagens/Beijinhocard.png" alt="">
+                    <div>
+                        <h3>Beijinho</h3>
+                        <p>R$2,50 por unidade</p>
+                        <button class="add" id="beijinho">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divisão">
+                <div class="card">
+                    <img src="imagens/doceLeitecard.png" alt="">
+                    <div>
+                        <h3>Leite em Pó</h3>
+                        <p>R$2,50 por unidade</p>
+                        <button class="add" id="leitePo">Adicionar</button>
+                    </div>
+
+                </div>
+                <div class="card">
+                    <img src="imagens/bichopecard.png" alt="">
+                    <div>
+                        <h3>Bicho de Pé</h3>
+                        <p>R$2,50 por unidade</p>
+                        <button class="add" id="bichoPe">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="imagens/amendoimcard.png" alt="">
+                    <div>
+                        <h3>Amendoim</h3>
+                        <p>R$2,50 por unidade</p>
+                        <button class="add" id="amendoim">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divisão">
+                <div class="card">
+                    <img src="imagens/cafecard.png" alt="">
+                    <div>
+                        <h3>Café</h3>
+                        <p>R$2,50 por unidade</p>
+                        <button class="add" id="cafe">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="imagens/maracujacard.png" alt="">
+                    <div>
+                        <h3>Maracujá</h3>
+                        <p>R$2,50 por unidade</p>
+                        <button class="add" id="maracuja">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-------------------------------------------------->
+        
+        <!--segundo Carrossel: Cones-->
+      <section class="hero2" data-hero="cones">
+
+            <div class="left">
+                <h1>Cones <br> Recheados </h1>
+                <p class="alter">Cheio com sabores <strong>tradicionais</strong>  ou  <br> <strong> Combinações Especiais  </strong></p>
+                <button>Monte o seu!</button>
+            </div>
+
+            <div class="center">
+                <img class="doce2" src="imagens/cone.png" alt="doce1">
+                <div class="indicadores">
+                    <div class="bola ativa"></div>
+                    <div class="bola"></div>
+                    <div class="bola"></div>
+                    <div class="bola"></div>
+                </div>
+                <span>Imagem meramente ilustrativa*</span>
+            </div>
+
+            <div class="right">
+                <img src="imagens/bolahero1.jpeg" alt="circulo hero1">
+                <p class="p2">Uma infinidade <br> de sabores!</p>
+            </div>
+
+        </section>  
+
+        <section class="opçõesbr escondido" id="opçõescones">
+
+            <div class="container" id="cont4" data-tipo="normal">
+                <h2>Tradicionais</h2>
+                <img src="imagens/conevetorial.png" alt="Cone tradicional">
+                <p>→ Sabores Únicos</p>
+            </div>
+
+            <div class="container" id="cont5" data-tipo="combinação">
+                <h2>Combinações</h2>
+                <img src="imagens/conevetorial.png" alt="Cone com combinação de sabores" style="filter: brightness(0) saturate(100%) invert(100%) sepia(80%);">
+                <p>→ Misturas Especiais</p>
+            </div>
+
+        </section>
+
+        <section class="saboresbr escondido" id="conesTradicionais">
+            <div class="divisão">
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Brigadeiro</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-brigadeiro" data-sabor="Brigadeiro">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Leite em pó</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-leite-po" data-sabor="Leite em pó">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="divisão">
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Beijinho</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-beijinho" data-sabor="Beijinho">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Amendoim</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-amendoim" data-sabor="Amendoim">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="divisão">
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Maracujá</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-maracuja" data-sabor="Maracujá">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Surpresa de uva</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-surpresa-uva" data-sabor="Surpresa de uva">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="saboresbr escondido" id="conesCombinados">
+            <div class="divisão">
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Brigadeiro com morango</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-brigadeiro-morango" data-sabor="Brigadeiro com morango">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Brigadeiro com uva</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-brigadeiro-uva" data-sabor="Brigadeiro com uva">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="divisão">
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Leite em pó com brigadeiro</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-leite-po-brigadeiro" data-sabor="Leite em pó com brigadeiro">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Beijinho com brigadeiro</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-beijinho-brigadeiro" data-sabor="Beijinho com brigadeiro">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="divisão">
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Amendoim com brigadeiro</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-amendoim-brigadeiro" data-sabor="Amendoim com brigadeiro">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <div>
+                        <h3>Maracujá com brigadeiro</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button class="add" id="cone-maracuja-brigadeiro" data-sabor="Maracujá com brigadeiro">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-------------------------------------------------->
+
+        <!--terceiro Carrossel: doces no potinho-->
+        <section class="hero" data-hero="doPo">
+            <div class="left">
+                <p class="alter2">Vai um <br> potinho aí?</p>
+                <img src="imagens/bolahero1.jpeg" alt="circulo hero1">
+            </div>
+
+            <div class="center">
+                <img class="doce1" src="imagens/brigadeiro.png" alt="doce1">
+                <div class="indicadores">
+                    <div class="bola ativa"></div>
+                    <div class="bola"></div>
+                    <div class="bola"></div>
+                </div>
+                <span>Imagem meramente ilustrativa*</span>
+            </div>
+
+            <div class="right">
+                <h1>Doces de Pote <br> Maravilhosos! </h1>
+                <p>Descubra seu doce <strong>favorito</strong> <br> Com esses doces de pote!</p>
+                <button>Encomende aqui!</button>
+            </div>
+        </section>
+
+        <!-------------------------------------------------->
+
+        <!--quarto Carrossel: Outros Doces-->
+        <section class="hero2" data-hero="especiais">
+
+            <div class="left">
+                <h1>Doces <br> Especiais </h1>
+                <p class="alter">Escolha a sua <strong> Próxima vontade  </strong> <br> com esses doces cheios de amor!</p>
+                <button>se presenteie!</button>
+            </div>
+
+            <div class="center">
+                <img class="doce2" src="imagens/cone.png" alt="doce1">
+                <div class="indicadores">
+                    <div class="bola ativa"></div>
+                    <div class="bola"></div>
+                    <div class="bola"></div>
+                </div>
+                <span>Imagem meramente ilustrativa*</span>
+            </div>
+
+            <div class="right">
+                <img src="imagens/bolahero1.jpeg" alt="circulo hero1">
+                <p class="p2">Doces especiais <br> para você!</p>
+            </div>
+
+        </section>
+
+      <!--  <section class="duvidas">
+            <div class="container">
+                <h2>Como funcionamos?</h2>
+                <p></p>
+            </div>
+        </section>-->
+
+        <section class="saboresbr sabores-novos escondido" id="saboresPotinhos" aria-labelledby="titulo-saboresPotinhos">
+            <span>R$ 100,00 o cento!</span>
+            <div class="lista-sabores">
+                <div class="card">
+                    <div>
+                        <h3>Mousse de limão</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button type="button" class="add" id="saboresPotinhos-0" data-sabor="Mousse de limão">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Morango com chocolate</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button type="button" class="add" id="saboresPotinhos-1" data-sabor="Morango com chocolate">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Brigadeiro com beijinho</h3>
+                        <p>R$ 10,00 por unidade</p>
+                        <button type="button" class="add" id="saboresPotinhos-2" data-sabor="Brigadeiro com beijinho">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="saboresbr sabores-novos escondido" id="saboresEspeciais" aria-labelledby="titulo-saboresEspeciais">
+            <span>Escolha seu favorito</span>
+            <div class="lista-sabores">
+                <div class="card">
+                    <div>
+                        <h3>Coxinha de morango</h3>
+                        <p>R$ 14,00 por unidade</p>
+                        <button type="button" class="add" id="saboresEspeciais-0" data-sabor="Coxinha de morango">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Surpresa de uva</h3>
+                        <p>R$ 14,00 por unidade</p>
+                        <button type="button" class="add" id="saboresEspeciais-1" data-sabor="Surpresa de uva">Adicionar</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Bombom de morango</h3>
+                        <p>R$ 14,00 por unidade</p>
+                        <button type="button" class="add" id="saboresEspeciais-2" data-sabor="Bombom de morango">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+        <div class="overlay" hidden aria-hidden="true"></div>
+        <aside class="resumo">
+            <button onclick="fechar()" class="fechar"><img src="imagens/cross-circle.png" alt="fechar"></button>
+            <h2>Pedidos</h2>
+            <img src="imagens/shopping-cart.png" alt="" id="carrinho">
+            <p id="vazio">Seu carrinho está vazio!</p>
+        </aside>
+
+        <aside class="usuario" id="painel-usuario" aria-labelledby="titulo-usuario" inert>
+            <button onclick="fechar()" class="fechar" type="button" aria-label="Fechar minha conta"><img src="imagens/cross-circle.png" alt=""></button>
+            <h2 id="titulo-usuario">Minha conta</h2>
+            <div class="usuario-perfil">
+                <img src="imagens/user.svg" alt="">
+                <h3 id="saudacao-usuario">Olá, visitante!</h3>
+                <p>Deixe seus dados prontos para o próximo pedido.</p>
+            </div>
+            <form id="form-usuario">
+                <label for="usuario-nome">Seu nome</label>
+                <input id="usuario-nome" name="nome" autocomplete="name" maxlength="80" required placeholder="Como podemos te chamar?">
+                <label for="usuario-telefone">Telefone / WhatsApp</label>
+                <input id="usuario-telefone" name="telefone" type="tel" autocomplete="tel" maxlength="25" placeholder="(DDD) 99999-9999">
+                <button type="submit">Salvar meus dados</button>
+                <p id="usuario-status" role="status"></p>
+            </form>
+            <button class="usuario-pedidos" type="button" onclick="abrir()">Ver meu carrinho</button>
+        </aside>
+
+
+    <script src="index.JS"></script>
+</body>
+</html>

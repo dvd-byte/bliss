@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teste dos formulários - Bliss</title>
+<style>
+    body { font-family: Arial, sans-serif; max-width: 640px; margin: 20px auto; padding: 0 16px; background: #faf6f8; color: #333; }
+    h1 { text-align: center; }
+    form { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
+    h2 { margin-top: 0; font-size: 1.15em; }
+    label { display: block; margin: 10px 0 4px; font-size: .9em; font-weight: bold; }
+    input, select { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #bbb; border-radius: 4px; }
+    button { margin-top: 14px; margin-right: 8px; padding: 9px 16px; border: 0; border-radius: 4px; background: #c2185b; color: #fff; cursor: pointer; }
+    button[type=button] { background: #666; }
+    .item { border-top: 1px dashed #ccc; margin-top: 10px; padding-top: 4px; }
+    .nota { font-size: .85em; color: #666; }
+</style>
+</head>
+<body>
+
+<h1>Teste dos formulários</h1>
+<p class="nota">Coloque este arquivo na mesma pasta dos arquivos PHP e abra pelo servidor (ex.: http://localhost/teste_formularios.html). Teste na ordem: cliente, doce, pedido, item, pagamento. Cada envio abre em uma nova aba para mostrar a resposta.</p>
+
+<!-- 1. CLIENTE -->
+<form action="cadastrar_clientes.php" method="POST" target="_blank">
+    <h2>1. Cliente</h2>
+
+    <label for="c_nome">Nome *</label>
+    <input type="text" id="c_nome" name="nome" maxlength="100" required>
+
+    <label for="c_tel">Telefone</label>
+    <input type="tel" id="c_tel" name="telefone" maxlength="20" pattern="[0-9()+\-.\s]{8,20}" placeholder="(11) 99999-9999">
+
+    <label for="c_email">E-mail</label>
+    <input type="email" id="c_email" name="email" maxlength="100">
+
+    <label for="c_end">Endereço</label>
+    <input type="text" id="c_end" name="endereco" maxlength="200">
+
+    <button type="submit">Cadastrar cliente</button>
+</form>
+
+<!-- 2. DOCE -->
+<form action="cadastrar_doces.php" method="POST" target="_blank">
+    <h2>2. Doce</h2>
+
+    <label for="d_nome">Nome do doce *</label>
+    <input type="text" id="d_nome" name="nome" maxlength="100" required>
+
+    <label for="d_preco">Preço (R$) *</label>
+    <input type="text" id="d_preco" name="preco" inputmode="decimal" pattern="\d{1,8}([.,]\d{1,2})?" placeholder="10,50" required>
+
+    <label for="d_cat">Categoria</label>
+    <input type="text" id="d_cat" name="categoria" maxlength="50">
+
+    <button type="submit">Cadastrar doce</button>
+</form>
+
+<!-- 3. PEDIDO -->
+<form action="cadastrar_pedido.php" method="POST" target="_blank">
+    <h2>3. Pedido (com itens)</h2>
+
+    <label for="p_cliente">ID do cliente *</label>
+    <input type="number" id="p_cliente" name="id_cliente" min="1" required>
+
+    <label for="p_data">Data de entrega</label>
+    <input type="datetime-local" id="p_data" name="data_entrega">
+
+    <label for="p_status">Status *</label>
+    <select id="p_status" name="status" required>
+        <option value="Pendente">Pendente</option>
+        <option value="Em produção">Em produção</option>
+        <option value="Pronto">Pronto</option>
+        <option value="Entregue">Entregue</option>
+    </select>
+
+    <div id="itens">
+        <div class="item">
+            <label>ID do doce *</label>
+            <input type="number" name="itens[0][id_doce]" min="1" required>
+            <label>Quantidade *</label>
+            <input type="number" name="itens[0][quantidade]" min="1" max="10000" required>
+        </div>
+    </div>
+
+    <button type="button" id="add-item">+ Adicionar item</button>
+    <button type="submit">Cadastrar pedido</button>
+</form>
+
+<!-- 4. ITEM DE PEDIDO -->
+<form action="cadastrar_item_pedido.php" method="POST" target="_blank">
+    <h2>4. Adicionar item a um pedido existente</h2>
+
+    <label for="i_pedido">ID do pedido *</label>
+    <input type="number" id="i_pedido" name="id_pedido" min="1" required>
+
+    <label for="i_doce">ID do doce *</label>
+    <input type="number" id="i_doce" name="id_doce" min="1" required>
+
+    <label for="i_qtd">Quantidade *</label>
+    <input type="number" id="i_qtd" name="quantidade" min="1" max="10000" required>
+
+    <button type="submit">Adicionar item</button>
+</form>
+
+<!-- 5. PAGAMENTO -->
+<form action="cadastrar_pagamento.php" method="POST" target="_blank">
+    <h2>5. Pagamento</h2>
+
+    <label for="g_pedido">ID do pedido *</label>
+    <input type="number" id="g_pedido" name="id_pedido" min="1" required>
+
+    <label for="g_forma">Forma de pagamento *</label>
+    <select id="g_forma" name="forma_pagamento" required>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Pix">Pix</option>
+        <option value="Cartão de crédito">Cartão de crédito</option>
+        <option value="Cartão de débito">Cartão de débito</option>
+    </select>
+
+    <label for="g_status">Status do pagamento *</label>
+    <select id="g_status" name="status_pagamento" required>
+        <option value="Pendente">Pendente</option>
+        <option value="Pago">Pago</option>
+        <option value="Cancelado">Cancelado</option>
+    </select>
+
+    <button type="submit">Registrar pagamento</button>
+</form>
+
+<script>
+    var indice = 1;
+    document.getElementById("add-item").addEventListener("click", function () {
+        var div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML =
+            '<label>ID do doce *</label>' +
+            '<input type="number" name="itens[' + indice + '][id_doce]" min="1" required>' +
+            '<label>Quantidade *</label>' +
+            '<input type="number" name="itens[' + indice + '][quantidade]" min="1" max="10000" required>';
+        document.getElementById("itens").appendChild(div);
+        indice++;
+    });
+</script>
+
+</body>
+</html>

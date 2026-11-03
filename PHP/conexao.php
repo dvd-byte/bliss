@@ -10,7 +10,7 @@ $senha = "bliss123";
 try {
 
     $pdo = new PDO(
-        "mysql:host=$host;dbname=$banco; charset-utf8mb4",
+        "mysql:host=$host;dbname=$banco;charset=utf8mb4",
         $usuario,
         $senha,
         [

@@ -15,6 +15,13 @@ const botaoUsuario = document.getElementById("abrir-usuario");
 const nomeUsuario = document.getElementById("usuario-nome");
 const telefoneUsuario = document.getElementById("usuario-telefone");
 const statusUsuario = document.getElementById("usuario-status");
+const statusPedido = document.getElementById("status-pedido");
+const emailUsuario = document.getElementById("usuario-email");
+const enderecoUsuario = document.getElementById("usuario-endereco");
+const dadosEntrega = document.getElementById("dados-entrega");
+const entregaData = document.getElementById("entrega-data");
+const entregaPagamento = document.getElementById("entrega-pagamento");
+dadosEntrega.remove(); // volta para dentro do carrinho quando houver itens
 let focoAnterior = null;
 resumo.inert = true;
 botaoUsuario.addEventListener("click", function() { abrir(usuario); });
@@ -42,25 +49,29 @@ try {
   if (dados && typeof dados.nome === "string" && typeof dados.telefone === "string") {
     nomeUsuario.value = dados.nome;
     telefoneUsuario.value = dados.telefone;
+    if (typeof dados.email === "string") emailUsuario.value = dados.email;
+    if (typeof dados.endereco === "string") enderecoUsuario.value = dados.endereco;
     atualizarSaudacao();
   }
 } catch (_) { /* O formulário continua disponível sem armazenamento local. */ }
-document.getElementById("form-usuario").addEventListener("submit", function(event) {
+document.getElementById("form-usuario").addEventListener("submit", async function(event) {
   event.preventDefault();
-  if (!nomeUsuario.value.trim()) {
+  const nome = nomeUsuario.value.trim();
+  const telefone = telefoneUsuario.value.trim();
+  const email = emailUsuario.value.trim();
+  const endereco = enderecoUsuario.value.trim();
+  if (!nome) {
     statusUsuario.textContent = "Preencha seu nome para salvar.";
     nomeUsuario.focus();
     return;
   }
   try {
-    localStorage.setItem("bliss-perfil", JSON.stringify({
-      nome: nomeUsuario.value.trim(), telefone: telefoneUsuario.value.trim()
-    }));
-    atualizarSaudacao();
-    statusUsuario.textContent = "Seus dados foram salvos neste navegador.";
-  } catch (_) {
-    statusUsuario.textContent = "Não foi possível salvar os dados neste navegador.";
-  }
+    localStorage.setItem("bliss-perfil", JSON.stringify({ nome: nome, telefone: telefone, email: email, endereco: endereco }));
+  } catch (_) { /* O cadastro no banco não depende do armazenamento local. */ }
+  atualizarSaudacao();
+  statusUsuario.textContent = "Salvando...";
+  const resultado = await salvarCliente(nome, telefone, email, endereco);
+  statusUsuario.textContent = resultado.ok ? "Seus dados foram salvos." : resultado.texto;
 });
 
 let heroAtual = document.querySelector("[data-hero='inicio']");
@@ -83,6 +94,170 @@ opcoesCones.querySelectorAll(".container").forEach(function(container) {
 });
 
 const pedido = [];
+
+/* ===== INTEGRAÇÃO COM O PHP / BANCO DE DADOS ===== */
+
+// Os arquivos PHP estão na MESMA pasta do index.html.
+// Se um dia ficarem em outra pasta, coloque o caminho aqui (ex.: "PHP/").
+const URL_PHP = "";
+
+// Mesma ordem e mesmos nomes do arquivo seed_doces.sql:
+// o id_doce de cada produto é a posição dele nesta lista (começando em 1).
+const CATALOGO = [
+  ["Tradicional", ["Chocolate", "Beijinho", "Leite em Pó", "Bicho de Pé", "Amendoim", "Café", "Maracujá"]],
+  ["Gourmet", ["Chocolate", "Beijinho", "Leite em Pó", "Bicho de Pé", "Amendoim", "Café", "Maracujá"]],
+  ["Personalizado", ["Chocolate", "Beijinho", "Leite em Pó", "Bicho de Pé", "Amendoim", "Café", "Maracujá"]],
+  ["Cone tradicional", ["Brigadeiro", "Leite em pó", "Beijinho", "Amendoim", "Maracujá", "Surpresa de uva"]],
+  ["Cone combinação", ["Brigadeiro com morango", "Brigadeiro com uva", "Leite em pó com brigadeiro",
+    "Beijinho com brigadeiro", "Amendoim com brigadeiro", "Maracujá com brigadeiro"]],
+  ["Doce no potinho", ["Mousse de limão", "Morango com chocolate", "Brigadeiro com beijinho"]],
+  ["Doce especial", ["Coxinha de morango", "Surpresa de uva", "Bombom de morango"]]
+];
+
+const IDS_DOCES = {};
+let proximoId = 1;
+CATALOGO.forEach(function(grupo) {
+  grupo[1].forEach(function(nome) {
+    IDS_DOCES[grupo[0] + "|" + nome] = proximoId++;
+  });
+});
+
+let clienteAtual = null;
+try {
+  const salvo = JSON.parse(localStorage.getItem("bliss-cliente") || "null");
+  if (salvo && salvo.id) clienteAtual = salvo;
+} catch (_) { /* segue sem armazenamento local */ }
+
+function guardarCliente(cliente) {
+  clienteAtual = cliente;
+  try {
+    if (cliente) localStorage.setItem("bliss-cliente", JSON.stringify(cliente));
+    else localStorage.removeItem("bliss-cliente");
+  } catch (_) { /* o cliente continua válido nesta página */ }
+}
+
+async function enviarParaPHP(url, dados) {
+  try {
+    const resposta = await fetch(url, { method: "POST", body: dados });
+    let texto = new DOMParser()
+      .parseFromString(await resposta.text(), "text/html")
+      .body.textContent.trim();
+    if (!resposta.ok && (!texto || texto.length > 200)) {
+      texto = "Não foi possível enviar (erro " + resposta.status + "). Abra o site pelo servidor PHP.";
+    }
+    return { ok: resposta.ok, texto: texto };
+  } catch (_) {
+    return { ok: false, texto: "Não foi possível conectar ao servidor. Tente novamente." };
+  }
+}
+
+async function salvarCliente(nome, telefone, email, endereco) {
+  if (clienteAtual && clienteAtual.nome === nome && clienteAtual.telefone === telefone
+      && (clienteAtual.email || "") === email && (clienteAtual.endereco || "") === endereco) {
+    return { ok: true, texto: "Seus dados já estavam salvos." };
+  }
+  const dados = new FormData();
+  dados.append("nome", nome);
+  dados.append("telefone", telefone);
+  dados.append("email", email);
+  dados.append("endereco", endereco);
+  const resultado = await enviarParaPHP(URL_PHP + "cadastrar_clientes.php", dados);
+  const id = resultado.texto.match(/ID:\s*(\d+)/);
+  if (resultado.ok && id) {
+    guardarCliente({ id: id[1], nome: nome, telefone: telefone, email: email, endereco: endereco });
+  } else if (resultado.ok) {
+    return { ok: false, texto: "Não foi possível confirmar o cadastro." };
+  }
+  return resultado;
+}
+
+function mostrarStatusPedido(texto, sucesso) {
+  if (!statusPedido) { alert(texto); return; }
+  statusPedido.textContent = texto;
+  statusPedido.classList.toggle("sucesso", sucesso);
+  statusPedido.classList.toggle("erro", !sucesso);
+}
+
+// Menor data/hora que o campo de entrega aceita (agora, no horário local)
+function minimoEntrega() {
+  const agora = new Date();
+  agora.setMinutes(agora.getMinutes() - agora.getTimezoneOffset());
+  return agora.toISOString().slice(0, 16);
+}
+
+async function finalizarPedido() {
+  if (!pedido.length) return;
+
+  if (!clienteAtual) {
+    statusUsuario.textContent = "Salve seus dados para finalizar o pedido.";
+    abrir(usuario);
+    return;
+  }
+
+  const formaPagamento = entregaPagamento.value;
+  if (!formaPagamento) {
+    mostrarStatusPedido("Escolha a forma de pagamento.", false);
+    entregaPagamento.focus();
+    return;
+  }
+
+  const dados = new FormData();
+  dados.append("id_cliente", clienteAtual.id);
+  dados.append("status", "Pendente");
+  if (entregaData.value) dados.append("data_entrega", entregaData.value);
+
+  for (let i = 0; i < pedido.length; i++) {
+    const idDoce = IDS_DOCES[pedido[i].categoria + "|" + pedido[i].doce];
+    if (!idDoce) {
+      mostrarStatusPedido("Produto sem cadastro no banco: " + pedido[i].doce, false);
+      return;
+    }
+    dados.append("itens[" + i + "][id_doce]", idDoce);
+    dados.append("itens[" + i + "][quantidade]", pedido[i].quantidade);
+  }
+
+  const botao = document.getElementById("finalizar");
+  if (botao) botao.disabled = true;
+
+  const resultado = await enviarParaPHP(URL_PHP + "cadastrar_pedido.php", dados);
+
+  if (resultado.ok) {
+    const numero = resultado.texto.match(/Pedido número:\s*(\d+)/);
+    const total = resultado.texto.match(/Valor total:\s*(R\$\s*[\d.,]+)/);
+    let mensagem = "Pedido " + (numero ? "nº " + numero[1] + " " : "") + "enviado!"
+      + (total ? " Total: " + total[1] + "." : "");
+    let sucesso = true;
+
+    // Registra o pagamento do pedido (fica pendente até a confirmação)
+    if (numero) {
+      const pagamento = new FormData();
+      pagamento.append("id_pedido", numero[1]);
+      pagamento.append("forma_pagamento", formaPagamento);
+      pagamento.append("status_pagamento", "Pendente");
+      const resultadoPagamento = await enviarParaPHP(URL_PHP + "cadastrar_pagamento.php", pagamento);
+      if (resultadoPagamento.ok) {
+        mensagem += " Pagamento: " + formaPagamento + " (pendente).";
+      } else {
+        mensagem += " O pagamento não foi registrado: " + resultadoPagamento.texto;
+        sucesso = false;
+      }
+    }
+
+    pedido.length = 0;
+    entregaData.value = "";
+    entregaPagamento.value = "";
+    atualizarResumo();
+    mostrarStatusPedido(mensagem, sucesso);
+    return;
+  }
+
+  if (/Cliente não encontrado/.test(resultado.texto)) {
+    guardarCliente(null);
+    resultado.texto = "Seus dados não foram encontrados. Salve-os novamente em 'Minha conta'.";
+  }
+  if (botao) botao.disabled = false;
+  mostrarStatusPedido(resultado.texto, false);
+}
 
 const brigadeiro = {
   tradicional: {
@@ -270,6 +445,7 @@ function atualizarResumo() {
     elemento.hidden = pedido.length > 0;
   });
   if (!pedido.length) return;
+  if (statusPedido) statusPedido.textContent = "";
 
   const containerPedido = document.createElement("div");
   containerPedido.classList.add("pedido");
@@ -297,8 +473,10 @@ function atualizarResumo() {
   finalizar.id = "finalizar";
   finalizar.type = "button";
   finalizar.textContent = "Finalizar";
+  finalizar.addEventListener("click", finalizarPedido);
   final.append(subtotal, finalizar);
-  containerPedido.appendChild(final);
+  entregaData.min = minimoEntrega();
+  containerPedido.append(dadosEntrega, final);
   resumo.appendChild(containerPedido);
 }
 

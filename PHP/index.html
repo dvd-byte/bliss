@@ -442,6 +442,19 @@
             <h2>Pedidos</h2>
             <img src="imagens/shopping-cart.png" alt="" id="carrinho">
             <p id="vazio">Seu carrinho está vazio!</p>
+            <p id="status-pedido" role="status"></p>
+            <div id="dados-entrega">
+                <label for="entrega-data">Data de entrega (opcional)</label>
+                <input id="entrega-data" type="datetime-local">
+                <label for="entrega-pagamento">Forma de pagamento</label>
+                <select id="entrega-pagamento">
+                    <option value="">Escolha...</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Cartão de crédito">Cartão de crédito</option>
+                    <option value="Cartão de débito">Cartão de débito</option>
+                </select>
+            </div>
         </aside>
 
         <aside class="usuario" id="painel-usuario" aria-labelledby="titulo-usuario" inert>
@@ -457,6 +470,10 @@
                 <input id="usuario-nome" name="nome" autocomplete="name" maxlength="80" required placeholder="Como podemos te chamar?">
                 <label for="usuario-telefone">Telefone / WhatsApp</label>
                 <input id="usuario-telefone" name="telefone" type="tel" autocomplete="tel" maxlength="25" placeholder="(DDD) 99999-9999">
+                <label for="usuario-email">E-mail</label>
+                <input id="usuario-email" name="email" type="email" autocomplete="email" maxlength="100" placeholder="seuemail@exemplo.com">
+                <label for="usuario-endereco">Endereço de entrega</label>
+                <input id="usuario-endereco" name="endereco" autocomplete="street-address" maxlength="200" placeholder="Rua, número, bairro">
                 <button type="submit">Salvar meus dados</button>
                 <p id="usuario-status" role="status"></p>
             </form>

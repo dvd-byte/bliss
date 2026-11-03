@@ -91,7 +91,7 @@ try {
     $stmt->execute([
         ":nome"         => $nome,
         ":preco"        => $preco,
-        ":descricao"    => $descricao,
+        ":descricao"    => $descricao !== "" ? $descricao : null,
         ":id_categoria" => $id_categoria
     ]);
 

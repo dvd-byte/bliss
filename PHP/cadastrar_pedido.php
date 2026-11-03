@@ -3,7 +3,7 @@
 require_once "conexao.php";
 require_once "funcoes.php";
 
-header("Content-Type: text/html; charset=UTF-8");
+header("Content-Type: text/plain; charset=UTF-8");
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     http_response_code(405);
@@ -46,7 +46,7 @@ try {
     }
 
 
-    /* VALIDAR DATA DE ENTREGA */
+    /* VALIDAR DATA DE ENTREGA (opcional) */
 
     if ($data_entrega !== "") {
 
@@ -146,8 +146,6 @@ try {
 
     /* PROCESSAR CADA ITEM */
 
-    $valor_total_centavos = 0;
-
     foreach ($itens as $item) {
 
         if (!is_array($item)) {
@@ -191,8 +189,6 @@ try {
 
         $subtotal_centavos = $preco_unitario_centavos * $quantidade;
 
-        $valor_total_centavos += $subtotal_centavos;
-
         $stmtItem->execute([
             ":id_pedido"      => $id_pedido,
             ":id_doce"        => $id_doce,
@@ -204,18 +200,9 @@ try {
     }
 
 
-    /* ATUALIZAR TOTAL DO PEDIDO */
+    /* CALCULAR E GRAVAR O TOTAL (com os pacotes de meio cento e cento) */
 
-    $stmt = $pdo->prepare(
-        "UPDATE pedido
-         SET valor_total = :valor_total
-         WHERE id_pedido = :id_pedido"
-    );
-
-    $stmt->execute([
-        ":valor_total" => centavosParaDecimal($valor_total_centavos),
-        ":id_pedido"   => $id_pedido
-    ]);
+    $valor_total_centavos = recalcularTotalPedido($pdo, $id_pedido);
 
 
     /* CONFIRMAR TRANSAÇÃO */
@@ -223,17 +210,12 @@ try {
     $pdo->commit();
 
 
-    /* EXIBIR RESULTADO */
+    /* RESPOSTA */
 
-    echo "<h2>Pedido cadastrado com sucesso!</h2>";
-
-    echo "<p>Pedido número: "
-        . htmlspecialchars((string) $id_pedido, ENT_QUOTES, "UTF-8")
-        . "</p>";
-
-    echo "<p>Valor total: R$ "
-        . number_format($valor_total_centavos / 100, 2, ",", ".")
-        . "</p>";
+    echo "Pedido cadastrado com sucesso!\n";
+    echo "Pedido número: " . $id_pedido . "\n";
+    echo "Valor total: R$ "
+        . number_format($valor_total_centavos / 100, 2, ",", ".");
 
 } catch (Throwable $e) {
 
@@ -245,7 +227,7 @@ try {
 
         http_response_code(400);
 
-        echo htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8");
+        echo $e->getMessage();
 
     } else {
 
@@ -258,5 +240,3 @@ try {
     }
 
 }
-
-?>

@@ -105,22 +105,9 @@ try {
         ":subtotal"       => centavosParaDecimal($subtotal_centavos)
     ]);
 
-    // Recalcula o total do pedido a partir dos itens
+    // Recalcula o total do pedido (com os pacotes de meio cento e cento)
 
-    $stmt = $pdo->prepare(
-        "UPDATE pedido
-         SET valor_total = (
-             SELECT COALESCE(SUM(subtotal), 0)
-             FROM item_pedido
-             WHERE id_pedido = :id_pedido_soma
-         )
-         WHERE id_pedido = :id_pedido"
-    );
-
-    $stmt->execute([
-        ":id_pedido_soma" => $id_pedido,
-        ":id_pedido"      => $id_pedido
-    ]);
+    recalcularTotalPedido($pdo, $id_pedido);
 
     $pdo->commit();
 
@@ -142,5 +129,3 @@ try {
     }
 
 }
-
-?>

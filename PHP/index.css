@@ -757,3 +757,18 @@ header li:hover {
     height: 800px;
   }
 }
+
+#status-pedido { font-size: 14px; text-align: center; padding: 0 12px; }
+#status-pedido.sucesso { color: #d8ffd8; font-weight: 600; }
+#status-pedido.erro { color: #ffd6d6; font-weight: 600; }
+.pedido #finalizar:disabled { opacity: 0.6; cursor: wait; }
+
+/* Dados de entrega e pagamento (dentro do carrinho) */
+#dados-entrega { gap: 6px; margin: 8px 0; }
+#dados-entrega label { font-size: 14px; font-weight: 600; }
+#dados-entrega input, #dados-entrega select {
+  width: 100%; height: auto; padding: 8px; border: 1px solid #e8c5ac;
+  border-radius: 8px; background: #fff8f1; color: #431d36;
+  font-size: 14px; text-align: left;
+}
+#dados-entrega :focus-visible { outline: 3px solid #f2c875; outline-offset: 2px; }

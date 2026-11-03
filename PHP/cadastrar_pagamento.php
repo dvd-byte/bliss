@@ -1,7 +1,7 @@
 <?php
 
-require_once "conexao.php";
-require_once "funcoes.php";
+require_once __DIR__ . "/conexao.php";
+require_once __DIR__ . "/funcoes.php";
 
 header("Content-Type: text/plain; charset=UTF-8");
 

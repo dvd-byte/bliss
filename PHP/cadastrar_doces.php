@@ -1,6 +1,6 @@
 <?php
 
-require_once "conexao.php";
+require_once __DIR__ . "/conexao.php";
 
 header("Content-Type: text/plain; charset=UTF-8");
 

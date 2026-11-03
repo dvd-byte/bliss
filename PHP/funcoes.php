@@ -42,7 +42,7 @@ function centavosParaDecimal(int $centavos): string
 
 /*
     REGRAS DE PREÇO DO SITE (em centavos).
-    Devem ser iguais às do index.JS (função calcularPreco).
+    Devem ser iguais às de assets/js/index.js (função calcularPreco).
     Os sabores da mesma categoria somam as quantidades
     para formar meio cento e cento.
 */

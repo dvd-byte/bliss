@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="assets/css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <body>
     
     <header>
-        <img src="imagens/mainlogo.svg" alt="logo">
+        <img src="assets/imagens/mainlogo.svg" alt="logo">
         <nav>
             <ul>
                 <li><button data-acao="inicio">Início</button></li>
@@ -25,14 +25,11 @@
         </nav>
         <div class="botões">
             <button id="abrir-usuario" type="button" aria-label="Abrir minha conta" aria-controls="painel-usuario" aria-expanded="false">
-                <img src="imagens/user.svg" alt="">
+                <img src="assets/imagens/user.svg" alt="">
             </button>
             <button onclick="abrir()" id="abrir-carrinho" type="button" aria-label="Abrir carrinho">
-                <img src="imagens/truck-side.svg" alt="">
+                <img src="assets/imagens/truck-side.svg" alt="">
                 <span id="aviso-carrinho" hidden aria-hidden="true"></span>
-            </button>
-            <button>
-                <img src="imagens/menu-burge.png" alt="b">
             </button>
         </div>
     </header>
@@ -40,23 +37,22 @@
     <main>
 
         <section class="inicio deslizarCarrossel" data-hero="inicio">
-            <img src="imagens/mainlogo2.svg" alt="logo principal da bliss gourmet">
+            <img src="assets/imagens/mainlogo2.svg" alt="logo principal da bliss gourmet">
         </section>
 
         <!--Primeiro Carrossel: Brigadeiros-->
         <section class="hero" data-hero="brigadeiros">
             <div class="left">
                 <p class="alter2">Garanta já <br> o seu!</p>
-                <img src="imagens/bolahero1.jpeg" alt="circulo hero1">
+                <img src="assets/imagens/bolahero1.jpeg" alt="circulo hero1">
             </div>
 
             <div class="center">
                 <div class="principal">
-                    <img class="doce1" src="imagens/brigadeiro.png" alt="doce1">
+                    <img class="doce1" src="assets/imagens/brigadeiro.png" alt="Brigadeiro">
                     <div class="indicadores">
-                        <div class="bola ativa"></div>
-                        <div class="bola"></div>
-                        <div class="bola"></div>
+                        <div class="bola ativa" aria-hidden="true"></div>
+                        <div class="bola" aria-hidden="true"></div>
                     </div>
                 </div>
                 <span>Imagem meramente ilustrativa*</span>
@@ -73,19 +69,19 @@
 
             <div class="container" id="cont1" data-tipo="tradicional">
                 <h2>Tradicional</h2>
-                <img src="imagens/tradicional.png" alt="brigadeiro">
+                <img src="assets/imagens/tradicional.png" alt="brigadeiro">
                 <p>→ Tamanho padrão</p>
             </div>
 
             <div class="container" id="cont2" data-tipo="gourmet">
                 <h2>Gourmet</h2>
-                <img src="imagens/gourmet.png" alt="gourmet" style="width: 300px; height: 300px; align-self: center; filter: brightness(0) saturate(100%) invert(100%) sepia(80%);">
+                <img src="assets/imagens/gourmet.png" alt="gourmet" style="width: 300px; height: 300px; align-self: center; filter: brightness(0) saturate(100%) invert(100%) sepia(80%);">
                 <p>→ Em tamanho maior</p>
             </div>
 
             <div class="container" id="cont3" data-tipo="personalizado">
                 <h2>Personalizados</h2>
-                <img src="imagens/personalizado.png" alt="personalizado">
+                <img src="assets/imagens/personalizado.png" alt="personalizado">
                 <p>→ Personalize do seu jeito</p>
             </div>
 
@@ -94,7 +90,7 @@
         <section class="saboresbr escondido">
             <div class="divisão">
                 <div class="card">
-                    <img src="imagens/Brigadeirocard.png" alt="">
+                    <img src="assets/imagens/Brigadeirocard.png" alt="">
                     <div>
                         <h3>Brigadeiro</h3>
                         <p>R$2,50 por unidade</p>
@@ -102,7 +98,7 @@
                     </div>                    
                 </div>
                 <div class="card">
-                    <img src="imagens/Beijinhocard.png" alt="">
+                    <img src="assets/imagens/Beijinhocard.png" alt="">
                     <div>
                         <h3>Beijinho</h3>
                         <p>R$2,50 por unidade</p>
@@ -113,7 +109,7 @@
 
             <div class="divisão">
                 <div class="card">
-                    <img src="imagens/doceLeitecard.png" alt="">
+                    <img src="assets/imagens/doceLeitecard.png" alt="">
                     <div>
                         <h3>Leite em Pó</h3>
                         <p>R$2,50 por unidade</p>
@@ -122,7 +118,7 @@
 
                 </div>
                 <div class="card">
-                    <img src="imagens/bichopecard.png" alt="">
+                    <img src="assets/imagens/bichopecard.png" alt="">
                     <div>
                         <h3>Bicho de Pé</h3>
                         <p>R$2,50 por unidade</p>
@@ -131,7 +127,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="imagens/amendoimcard.png" alt="">
+                    <img src="assets/imagens/amendoimcard.png" alt="">
                     <div>
                         <h3>Amendoim</h3>
                         <p>R$2,50 por unidade</p>
@@ -142,7 +138,7 @@
 
             <div class="divisão">
                 <div class="card">
-                    <img src="imagens/cafecard.png" alt="">
+                    <img src="assets/imagens/cafecard.png" alt="">
                     <div>
                         <h3>Café</h3>
                         <p>R$2,50 por unidade</p>
@@ -150,7 +146,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <img src="imagens/maracujacard.png" alt="">
+                    <img src="assets/imagens/maracujacard.png" alt="">
                     <div>
                         <h3>Maracujá</h3>
                         <p>R$2,50 por unidade</p>
@@ -172,18 +168,12 @@
             </div>
 
             <div class="center">
-                <img class="doce2" src="imagens/cone.png" alt="doce1">
-                <div class="indicadores">
-                    <div class="bola ativa"></div>
-                    <div class="bola"></div>
-                    <div class="bola"></div>
-                    <div class="bola"></div>
-                </div>
+                <img class="doce2" src="assets/imagens/cone.png" alt="doce1">
                 <span>Imagem meramente ilustrativa*</span>
             </div>
 
             <div class="right">
-                <img src="imagens/bolahero1.jpeg" alt="circulo hero1">
+                <img src="assets/imagens/bolahero1.jpeg" alt="circulo hero1">
                 <p class="p2">Uma infinidade <br> de sabores!</p>
             </div>
 
@@ -193,13 +183,13 @@
 
             <div class="container" id="cont4" data-tipo="normal">
                 <h2>Tradicionais</h2>
-                <img src="imagens/conevetorial.png" alt="Cone tradicional">
+                <img src="assets/imagens/conevetorial.png" alt="Cone tradicional">
                 <p>→ Sabores Únicos</p>
             </div>
 
             <div class="container" id="cont5" data-tipo="combinação">
                 <h2>Combinações</h2>
-                <img src="imagens/conevetorial.png" alt="Cone com combinação de sabores" style="filter: brightness(0) saturate(100%) invert(100%) sepia(80%);">
+                <img src="assets/imagens/conevetorial.png" alt="Cone com combinação de sabores" style="filter: brightness(0) saturate(100%) invert(100%) sepia(80%);">
                 <p>→ Misturas Especiais</p>
             </div>
 
@@ -208,7 +198,7 @@
         <section class="saboresbr escondido" id="conesTradicionais">
             <div class="divisão">
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Brigadeiro</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -216,7 +206,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Leite em pó</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -226,7 +216,7 @@
             </div>
             <div class="divisão">
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Beijinho</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -234,7 +224,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Amendoim</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -244,7 +234,7 @@
             </div>
             <div class="divisão">
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Maracujá</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -252,7 +242,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Surpresa de uva</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -265,7 +255,7 @@
         <section class="saboresbr escondido" id="conesCombinados">
             <div class="divisão">
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Brigadeiro com morango</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -273,7 +263,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Brigadeiro com uva</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -283,7 +273,7 @@
             </div>
             <div class="divisão">
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Leite em pó com brigadeiro</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -291,7 +281,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Beijinho com brigadeiro</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -301,7 +291,7 @@
             </div>
             <div class="divisão">
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Amendoim com brigadeiro</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -309,7 +299,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <img src="imagens/cone.png" alt="Cone ilustrativo">
+                    <img src="assets/imagens/cone.png" alt="Cone ilustrativo">
                     <div>
                         <h3>Maracujá com brigadeiro</h3>
                         <p>R$ 10,00 por unidade</p>
@@ -325,16 +315,11 @@
         <section class="hero" data-hero="doPo">
             <div class="left">
                 <p class="alter2">Vai um <br> potinho aí?</p>
-                <img src="imagens/bolahero1.jpeg" alt="circulo hero1">
+                <img src="assets/imagens/bolahero1.jpeg" alt="circulo hero1">
             </div>
 
             <div class="center">
-                <img class="doce1" src="imagens/brigadeiro.png" alt="doce1">
-                <div class="indicadores">
-                    <div class="bola ativa"></div>
-                    <div class="bola"></div>
-                    <div class="bola"></div>
-                </div>
+                <img class="doce1" src="assets/imagens/mousse_de_limao_no_potinho.png" alt="doce1">
                 <span>Imagem meramente ilustrativa*</span>
             </div>
 
@@ -357,78 +342,82 @@
             </div>
 
             <div class="center">
-                <img class="doce2" src="imagens/cone.png" alt="doce1">
-                <div class="indicadores">
-                    <div class="bola ativa"></div>
-                    <div class="bola"></div>
-                    <div class="bola"></div>
-                </div>
+                <img class="doce2" src="assets/imagens/bombom_de_morango.png" alt="doce1">
                 <span>Imagem meramente ilustrativa*</span>
             </div>
 
             <div class="right">
-                <img src="imagens/bolahero1.jpeg" alt="circulo hero1">
+                <img src="assets/imagens/bolahero1.jpeg" alt="circulo hero1">
                 <p class="p2">Doces especiais <br> para você!</p>
             </div>
 
         </section>
 
-      <!--  <section class="duvidas">
-            <div class="container">
-                <h2>Como funcionamos?</h2>
-                <p></p>
-            </div>
-        </section>-->
-
         <section class="saboresbr sabores-novos escondido" id="saboresPotinhos" aria-labelledby="titulo-saboresPotinhos">
-            <span>R$ 100,00 o cento!</span>
             <div class="lista-sabores">
-                <div class="card">
-                    <div>
+                <div class="produto-sabor">
+                    <img class="imagem-sabor" src="assets/imagens/mousse_de_limao_no_potinho.png" alt="Mousse de limão">
+                    <div class="card">
+                        <div>
                         <h3>Mousse de limão</h3>
                         <p>R$ 10,00 por unidade</p>
                         <button type="button" class="add" id="saboresPotinhos-0" data-sabor="Mousse de limão">Adicionar</button>
                     </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <div>
+                <div class="produto-sabor">
+                    <img class="imagem-sabor" src="assets/imagens/morango_com_chocolate_no_potinho.png" alt="Morango com chocolate">
+                    <div class="card">
+                        <div>
                         <h3>Morango com chocolate</h3>
                         <p>R$ 10,00 por unidade</p>
                         <button type="button" class="add" id="saboresPotinhos-1" data-sabor="Morango com chocolate">Adicionar</button>
                     </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <div>
+                <div class="produto-sabor">
+                    <img class="imagem-sabor" src="assets/imagens/brigadeiro_com_beijinho_no_potinho.png" alt="Brigadeiro com beijinho">
+                    <div class="card">
+                        <div>
                         <h3>Brigadeiro com beijinho</h3>
                         <p>R$ 10,00 por unidade</p>
                         <button type="button" class="add" id="saboresPotinhos-2" data-sabor="Brigadeiro com beijinho">Adicionar</button>
+                    </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="saboresbr sabores-novos escondido" id="saboresEspeciais" aria-labelledby="titulo-saboresEspeciais">
-            <span>Escolha seu favorito</span>
             <div class="lista-sabores">
-                <div class="card">
-                    <div>
+                <div class="produto-sabor">
+                    <img class="imagem-sabor" src="assets/imagens/coxinha_de_morango.png" alt="Coxinha de morango">
+                    <div class="card">
+                        <div>
                         <h3>Coxinha de morango</h3>
                         <p>R$ 14,00 por unidade</p>
                         <button type="button" class="add" id="saboresEspeciais-0" data-sabor="Coxinha de morango">Adicionar</button>
                     </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <div>
+                <div class="produto-sabor">
+                    <img class="imagem-sabor" src="assets/imagens/surpresa_de_uva.png" alt="Surpresa de uva">
+                    <div class="card">
+                        <div>
                         <h3>Surpresa de uva</h3>
                         <p>R$ 14,00 por unidade</p>
                         <button type="button" class="add" id="saboresEspeciais-1" data-sabor="Surpresa de uva">Adicionar</button>
                     </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <div>
+                <div class="produto-sabor">
+                    <img class="imagem-sabor" src="assets/imagens/bombom_de_morango.png" alt="Bombom de morango">
+                    <div class="card">
+                        <div>
                         <h3>Bombom de morango</h3>
                         <p>R$ 14,00 por unidade</p>
                         <button type="button" class="add" id="saboresEspeciais-2" data-sabor="Bombom de morango">Adicionar</button>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -438,9 +427,9 @@
     
         <div class="overlay" hidden aria-hidden="true"></div>
         <aside class="resumo">
-            <button onclick="fechar()" class="fechar"><img src="imagens/cross-circle.png" alt="fechar"></button>
+            <button onclick="fechar()" class="fechar"><img src="assets/imagens/cross-circle.png" alt="fechar"></button>
             <h2>Pedidos</h2>
-            <img src="imagens/shopping-cart.png" alt="" id="carrinho">
+            <img src="assets/imagens/shopping-cart.png" alt="" id="carrinho">
             <p id="vazio">Seu carrinho está vazio!</p>
             <p id="status-pedido" role="status"></p>
             <div id="dados-entrega">
@@ -458,10 +447,10 @@
         </aside>
 
         <aside class="usuario" id="painel-usuario" aria-labelledby="titulo-usuario" inert>
-            <button onclick="fechar()" class="fechar" type="button" aria-label="Fechar minha conta"><img src="imagens/cross-circle.png" alt=""></button>
+            <button onclick="fechar()" class="fechar" type="button" aria-label="Fechar minha conta"><img src="assets/imagens/cross-circle.png" alt=""></button>
             <h2 id="titulo-usuario">Minha conta</h2>
             <div class="usuario-perfil">
-                <img src="imagens/user.svg" alt="">
+                <img src="assets/imagens/user.svg" alt="">
                 <h3 id="saudacao-usuario">Olá, visitante!</h3>
                 <p>Deixe seus dados prontos para o próximo pedido.</p>
             </div>
@@ -481,6 +470,6 @@
         </aside>
 
 
-    <script src="index.JS"></script>
+    <script src="assets/js/index.js"></script>
 </body>
 </html>

@@ -1,5 +1,39 @@
 const nav = document.querySelectorAll("[data-acao]");
 const heros = document.querySelectorAll("[data-hero]");
+const heroBrigadeiros = document.querySelector('[data-hero="brigadeiros"]');
+const imagemBrigadeiros = heroBrigadeiros.querySelector(".principal .doce1");
+const indicadoresBrigadeiros = heroBrigadeiros.querySelectorAll(".indicadores .bola");
+const slidesBrigadeiros = [
+  { src: "assets/imagens/brigadeiro.png", alt: "Brigadeiro" },
+  { src: "assets/imagens/beijinho.png", alt: "Beijinho" }
+];
+const imagensCarrossel = slidesBrigadeiros.map(function(slide) {
+  const imagem = new Image();
+  imagem.src = slide.src;
+  return imagem;
+});
+let slideBrigadeiroAtual = 0;
+setInterval(function() {
+  const proximo = (slideBrigadeiroAtual + 1) % slidesBrigadeiros.length;
+  if (!imagensCarrossel[proximo].complete || !imagensCarrossel[proximo].naturalWidth) return;
+  imagemBrigadeiros.classList.add("trocando-imagem");
+  const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setTimeout(function() {
+    slideBrigadeiroAtual = proximo;
+    const slide = slidesBrigadeiros[slideBrigadeiroAtual];
+    imagemBrigadeiros.src = slide.src;
+    imagemBrigadeiros.alt = slide.alt;
+    indicadoresBrigadeiros.forEach(function(bola, posicao) {
+      bola.classList.toggle("ativa", posicao === slideBrigadeiroAtual);
+    });
+    // Reposiciona à direita enquanto invisível, sem animar esse salto.
+    imagemBrigadeiros.classList.add("entrada-direita");
+    imagemBrigadeiros.classList.remove("trocando-imagem");
+    void imagemBrigadeiros.offsetWidth;
+    imagemBrigadeiros.classList.remove("entrada-direita");
+  }, reduzirMovimento ? 0 : 550);
+}, 8000);
+
 const botãobr = document.getElementById("botãobr");
 const containeres = document.querySelectorAll(".opçõesbr:not(#opçõescones) .container");
 const cardsbr = document.querySelectorAll(".card");
@@ -97,11 +131,10 @@ const pedido = [];
 
 /* ===== INTEGRAÇÃO COM O PHP / BANCO DE DADOS ===== */
 
-// Os arquivos PHP estão na MESMA pasta do index.html.
-// Se um dia ficarem em outra pasta, coloque o caminho aqui (ex.: "PHP/").
-const URL_PHP = "";
+// Caminho do backend relativo ao index.html na raiz do site.
+const URL_PHP = "php/";
 
-// Mesma ordem e mesmos nomes do arquivo seed_doces.sql:
+// Mesma ordem e mesmos nomes do arquivo database/seed_doces.sql:
 // o id_doce de cada produto é a posição dele nesta lista (começando em 1).
 const CATALOGO = [
   ["Tradicional", ["Chocolate", "Beijinho", "Leite em Pó", "Bicho de Pé", "Amendoim", "Café", "Maracujá"]],

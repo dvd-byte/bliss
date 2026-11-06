@@ -14,7 +14,8 @@
     
     <header>
         <img src="assets/imagens/mainlogo.svg" alt="logo">
-        <nav>
+        <button id="menu-mobile" type="button" aria-label="Abrir navegação" aria-controls="navegacao" aria-expanded="false">☰</button>
+        <nav id="navegacao" aria-label="Categorias de doces">
             <ul>
                 <li><button data-acao="inicio">Início</button></li>
                 <li><button data-acao="brigadeiros">Brigadeiros</button></li>
@@ -353,7 +354,7 @@
 
         </section>
 
-        <section class="saboresbr sabores-novos escondido" id="saboresPotinhos" aria-labelledby="titulo-saboresPotinhos">
+        <section class="saboresbr sabores-novos escondido" id="saboresPotinhos" aria-label="Sabores de doces no potinho">
             <div class="lista-sabores">
                 <div class="produto-sabor">
                     <img class="imagem-sabor" src="assets/imagens/mousse_de_limao_no_potinho.png" alt="Mousse de limão">
@@ -388,7 +389,7 @@
             </div>
         </section>
 
-        <section class="saboresbr sabores-novos escondido" id="saboresEspeciais" aria-labelledby="titulo-saboresEspeciais">
+        <section class="saboresbr sabores-novos escondido" id="saboresEspeciais" aria-label="Sabores de doces especiais">
             <div class="lista-sabores">
                 <div class="produto-sabor">
                     <img class="imagem-sabor" src="assets/imagens/coxinha_de_morango.png" alt="Coxinha de morango">

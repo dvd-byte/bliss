@@ -64,7 +64,7 @@ document.addEventListener("keydown", function(event) {
   if (!menu) return;
   if (event.key === "Escape") fechar();
   if (event.key === "Tab") {
-    const controles = menu.querySelectorAll("button, input, a[href], select, textarea");
+    const controles = Array.from(menu.querySelectorAll("button, input, a[href], select, textarea")).filter(el => !el.disabled && el.getClientRects().length);
     const primeiro = controles[0];
     const ultimo = controles[controles.length - 1];
     if (event.shiftKey && document.activeElement === primeiro) {
@@ -115,6 +115,44 @@ let saborSelecionado = "";
 let categoria = "";
 let telaAtual = heroAtual;
 let emTransicao = false;
+const telas = document.querySelectorAll("main > section");
+telas.forEach(function(tela) {
+  tela.hidden = tela !== telaAtual;
+  tela.inert = tela !== telaAtual;
+});
+document.querySelectorAll(".container[data-tipo]").forEach(function(container) {
+  container.tabIndex = 0;
+  container.setAttribute("role", "button");
+  container.addEventListener("keydown", function(event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault(); container.click();
+    }
+  });
+});
+const menuMobile = document.getElementById("menu-mobile");
+const navegacao = document.getElementById("navegacao");
+const telaCompacta = window.matchMedia("(max-width: 800px)");
+function fecharNavegacao() {
+  navegacao.classList.remove("menu-aberto");
+  menuMobile.setAttribute("aria-expanded", "false");
+  navegacao.inert = telaCompacta.matches;
+}
+menuMobile.addEventListener("click", function() {
+  const aberto = menuMobile.getAttribute("aria-expanded") !== "true";
+  navegacao.classList.toggle("menu-aberto", aberto);
+  menuMobile.setAttribute("aria-expanded", String(aberto));
+  navegacao.inert = !aberto;
+});
+document.addEventListener("click", function(event) {
+  if (!navegacao.contains(event.target) && !menuMobile.contains(event.target)) fecharNavegacao();
+});
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape" && menuMobile.getAttribute("aria-expanded") === "true") {
+    fecharNavegacao(); menuMobile.focus();
+  }
+});
+telaCompacta.addEventListener("change", fecharNavegacao);
+fecharNavegacao();
 const opcoesCones = document.getElementById("opçõescones");
 const conesTradicionais = document.getElementById("conesTradicionais");
 const conesCombinados = document.getElementById("conesCombinados");
@@ -553,15 +591,24 @@ function criarItem(containerPedido, itemPedido) {
   containerPedido.appendChild(novoItem);
 }
 
+function origemAtivaInerte() { telaAtual.inert = true; }
+
 function trocarTela(destino) {
   if (!destino || destino === telaAtual || emTransicao) return;
   emTransicao = true;
+  origemAtivaInerte();
   const origem = telaAtual;
   let temporizador;
   function concluir(event) {
     if (event && (event.target !== origem || event.propertyName !== "transform")) return;
     origem.removeEventListener("transitionend", concluir);
     clearTimeout(temporizador);
+    origem.hidden = true;
+    origem.inert = true;
+    destino.hidden = false;
+    destino.inert = false;
+    window.scrollTo({ top: 0, behavior: "instant" });
+    void destino.offsetWidth;
     if (destino.hasAttribute("data-hero")) {
       destino.classList.add("deslizarCarrossel");
       heroAtual = destino;
@@ -569,6 +616,8 @@ function trocarTela(destino) {
       destino.classList.remove("escondido");
     }
     telaAtual = destino;
+    destino.tabIndex = -1;
+    destino.focus({ preventScroll: true });
     emTransicao = false;
   }
   origem.addEventListener("transitionend", concluir);
@@ -592,6 +641,10 @@ function mostrarSabores() {
 }
 
 function abrir(menu = resumo){
+  fecharNavegacao();
+  document.body.classList.add("painel-aberto");
+  document.querySelector("main").inert = true;
+  document.querySelector("header").inert = true;
   if (!document.querySelector("aside.aberto")) focoAnterior = document.activeElement;
   document.querySelectorAll("aside.aberto").forEach(function(aberto) {
     aberto.classList.remove("aberto");
@@ -611,6 +664,9 @@ function fechar(){
     menu.inert = true;
   });
   overlay.hidden = true;
+  document.body.classList.remove("painel-aberto");
+  document.querySelector("main").inert = false;
+  document.querySelector("header").inert = false;
   botaoUsuario.setAttribute("aria-expanded", "false");
   focoAnterior?.focus();
   focoAnterior = null;
@@ -621,6 +677,7 @@ nav.forEach(function(button) {
     const destino = Array.from(heros).find(function(hero) {
       return hero.dataset.hero === event.currentTarget.dataset.acao;
     });
+    fecharNavegacao();
     trocarTela(destino);
   });
 });

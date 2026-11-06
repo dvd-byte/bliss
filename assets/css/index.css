@@ -849,3 +849,143 @@ header li:hover {
   height: auto;
   object-fit: contain;
 }
+
+/* Layout responsivo: as telas ativas usam a rolagem da página. */
+[hidden] { display: none !important; }
+:root { --altura-header: 100px; }
+html { overflow-x: clip; scroll-padding-top: var(--altura-header); }
+body { height: auto; min-height: 100dvh; }
+body.painel-aberto { overflow: hidden; }
+main { overflow-x: clip; min-height: 100dvh; }
+main > section { position: relative; min-height: 100dvh; height: auto; }
+main > section:focus { outline: none; }
+header { top: 0; height: var(--altura-header); padding: 10px clamp(16px, 2vw, 36px); gap: 16px; }
+header > img { width: 84px; height: 84px; object-fit: contain; flex-shrink: 0; }
+header nav { min-width: 0; }
+header ul { gap: clamp(10px, 1.8vw, 30px); align-items: center; }
+header nav button { font-size: clamp(16px, 1.8vw, 28px); min-height: 44px; white-space: nowrap; }
+.botões { gap: 8px; padding: 6px 10px; }
+.botões button { min-width: 44px; min-height: 44px; }
+.botões img { width: 28px; height: 28px; }
+#aviso-carrinho { top: 2px; right: 1px; }
+#menu-mobile { display: none; }
+.inicio { padding: var(--altura-header) 24px 32px; }
+.inicio img { width: min(600px, 85vw); height: auto; max-height: 75dvh; object-fit: contain; }
+.hero, .hero2 { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: var(--altura-header) max(16px, calc((100vw - 1600px) / 2)) 32px; }
+.hero > *, .hero2 > * { min-width: 0; }
+.left, .right { padding: clamp(12px, 2vw, 30px); gap: 20px; }
+.left h1, .right h1 { font-size: clamp(30px, 3.2vw, 48px); overflow-wrap: anywhere; }
+.left .alter, .right p { font-size: clamp(16px, 1.4vw, 20px); line-height: 1.45; }
+.left img, .right img { max-width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.left .alter2, .right .p2 { padding: clamp(24px, 4vw, 64px) clamp(18px, 2vw, 30px); font-size: clamp(18px, 1.8vw, 26px); }
+.principal { width: 100%; }
+.center .doce1, .center .doce2, [data-hero="especiais"] .center .doce2 { width: min(100%, 370px); height: auto; max-height: 420px; object-fit: contain; margin: 0; }
+.center span { position: static; text-align: center; margin-top: 16px; }
+.left button, .right button, .card .add { min-height: 44px; }
+.opçõesbr, #opçõescones { justify-content: center; flex-wrap: wrap; gap: 24px; padding: calc(var(--altura-header) + 24px) 24px 40px; }
+.container { width: min(360px, calc((100vw - 96px) / 3)); height: auto; min-height: 400px; padding: 24px 16px; gap: 16px; }
+.container img, #opçõescones .container img { width: min(100%, 280px) !important; height: 260px !important; object-fit: contain; align-self: center; margin: 0; }
+.container h2 { font-size: clamp(22px, 2.1vw, 32px); }
+.container p { font-size: 18px; }
+.saboresbr:not(.sabores-novos) { display: grid; grid-template-columns: repeat(3, minmax(0, 400px)); align-content: center; gap: 20px; padding: calc(var(--altura-header) + 24px) 24px 40px; }
+.saboresbr > .divisão { display: contents; }
+.card { width: 100%; min-width: 0; height: auto; min-height: 180px; padding: 16px; grid-template-columns: minmax(0, 40%) minmax(0, 60%); border-radius: 40px; }
+.card img { width: 100%; max-height: 150px; object-fit: contain; }
+.card h3 { font-size: clamp(18px, 1.6vw, 24px); overflow-wrap: anywhere; }
+.card p { font-size: 16px; }
+.sabores-novos { padding: calc(var(--altura-header) + 16px) 24px 32px; }
+.lista-sabores { display: grid; grid-template-columns: repeat(3, minmax(0, 360px)); gap: 24px; max-width: 1200px; }
+.sabores-novos .produto-sabor { width: 100%; min-width: 0; }
+.sabores-novos .produto-sabor > .imagem-sabor { width: 100%; height: 360px; object-fit: contain; flex-shrink: 0; }
+.sabores-novos .card { width: 100%; padding: 24px; }
+.resumo, .usuario { width: min(420px, 100%); height: 100dvh; padding: 88px 18px max(24px, env(safe-area-inset-bottom)); overflow-y: auto; overscroll-behavior: contain; gap: 16px; visibility: hidden; transition: transform .5s ease, visibility .5s; }
+.resumo.aberto, .usuario.aberto { visibility: visible; }
+.resumo > *, .usuario > * { flex-shrink: 0; max-width: 100%; }
+.resumo h2, .usuario > h2 { top: 22px; font-size: 28px; }
+.resumo .fechar, .usuario .fechar { top: 20px; left: 16px; width: 44px; height: 44px; display: grid; place-items: center; }
+.fechar img { width: 24px; height: 24px; }
+.resumo #carrinho { width: 100px; object-fit: contain; }
+.resumo .pedido { width: 100%; padding: 14px; gap: 14px; }
+.pedido .item { flex-wrap: wrap; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid #ffffff30; }
+.pedido .item > div:first-child { flex: 1 1 150px; min-width: 0; }
+.pedido h3 { font-size: 20px; overflow-wrap: anywhere; }
+.pedido .quantidade { flex-shrink: 0; }
+.pedido .quantidade button { width: 44px; height: 44px; }
+.pedido input { height: 44px; font-size: 16px; }
+.pedido .final { flex-direction: column; gap: 12px; }
+.pedido #finalizar { width: 100%; min-height: 48px; height: auto; padding: 10px; }
+#dados-entrega { width: 100%; min-width: 0; }
+#dados-entrega input, #dados-entrega select, #form-usuario input { min-height: 44px; min-width: 0; max-width: 100%; font-size: 16px; }
+#status-pedido, #usuario-status, #saudacao-usuario { overflow-wrap: anywhere; }
+#form-usuario button, .usuario-pedidos { min-height: 48px; }
+:focus-visible { outline: 3px solid #f2c875; outline-offset: 3px; }
+@media (min-width: 801px) and (max-width: 1050px) {
+  header { gap: 8px; padding-inline: 12px; }
+  header > img { width: 64px; height: 64px; }
+  header ul { gap: 10px; }
+  header nav { padding: 6px 8px; }
+  header nav button { font-size: 16px; }
+  .botões { gap: 2px; padding: 4px; }
+  .saboresbr:not(.sabores-novos) { grid-template-columns: repeat(2, minmax(0, 400px)); }
+}
+@media (max-width: 800px) {
+  :root { --altura-header: 84px; }
+  header { padding: 8px 16px; gap: 10px; background: rgba(67,29,54,.92); backdrop-filter: blur(10px); }
+  header > img { width: 64px; height: 64px; margin-right: auto; }
+  #menu-mobile { display: block; order: 2; min-width: 44px; min-height: 44px; font-size: 26px; border: 1px solid #ffffff50; border-radius: 14px; }
+  .botões { order: 1; }
+  header nav { position: absolute; top: calc(100% + 8px); right: 16px; left: 16px; padding: 12px; background: #431d36f5; visibility: hidden; opacity: 0; pointer-events: none; }
+  header nav.menu-aberto { visibility: visible; opacity: 1; pointer-events: auto; }
+  header ul { display: flex; flex-wrap: wrap; gap: 8px; }
+  header li { flex: 1 1 30%; }
+  header nav button { width: 100%; font-size: 18px; padding: 8px; }
+  .hero, .hero2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; padding: calc(var(--altura-header) + 24px) 24px 32px; align-content: center; }
+  .hero .right, .hero2 .left { grid-column: 1; grid-row: 1; padding: 0; align-items: flex-start; }
+  .hero .center, .hero2 .center { grid-column: 2; grid-row: 1; }
+  .hero .left, .hero2 .right { grid-column: 1 / -1; grid-row: 2; flex-direction: row; align-items: center; justify-content: center; padding: 0; gap: 24px; }
+  .hero .left img, .hero2 .right img { width: 120px; height: 120px; align-self: center; }
+  .left .alter2, .right .p2 { padding: 24px; font-size: 18px; align-self: center; }
+  .left h1, .right h1 { font-size: 32px; text-align: left; align-self: flex-start; }
+  .left .alter, .left button { text-align: left; align-self: flex-start; }
+  .center .doce1, .center .doce2, [data-hero="especiais"] .center .doce2 { max-height: 300px; }
+  [data-hero="brigadeiros"] .principal .doce1[src$="beijinho.png"] { left: 0; }
+  .opçõesbr, #opçõescones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: center; gap: 20px; }
+  .container { width: 100%; min-height: 320px; }
+  .container img, #opçõescones .container img { height: 200px !important; }
+  .saboresbr:not(.sabores-novos), .lista-sabores { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .card { border-radius: 28px; padding: 14px; }
+  .card .add { padding: 10px 16px; }
+  .sabores-novos .produto-sabor > .imagem-sabor { height: 300px; }
+}
+@media (max-width: 500px) {
+  :root { --altura-header: 76px; }
+  header { padding-inline: 12px; gap: 8px; }
+  header > img { width: 58px; height: 58px; }
+  .botões { gap: 2px; padding: 2px 6px; border-radius: 16px; }
+  .botões img { width: 24px; height: 24px; }
+  header nav { left: 12px; right: 12px; }
+  header ul { flex-direction: column; align-items: stretch; }
+  header li { flex: auto; }
+  header nav button { text-align: left; padding: 8px 16px; }
+  .hero, .hero2 { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: calc(var(--altura-header) + 24px) 20px 32px; }
+  .hero .right, .hero2 .left { grid-column: 1; grid-row: 1; align-items: center; text-align: center; }
+  .hero .center, .hero2 .center { grid-column: 1; grid-row: 2; }
+  .hero .left, .hero2 .right { grid-column: 1; grid-row: 3; gap: 16px; }
+  .left h1, .right h1 { font-size: 30px; text-align: center; align-self: center; }
+  .left .alter, .left button { text-align: center; align-self: center; }
+  .left .alter, .right p { font-size: 16px; }
+  .hero .left img, .hero2 .right img { width: 96px; height: 96px; }
+  .left .alter2, .right .p2 { font-size: 15px; padding: 22px 16px; }
+  .center .doce1, .center .doce2, [data-hero="especiais"] .center .doce2 { width: min(100%, 300px); max-height: 300px; }
+  .opçõesbr, #opçõescones, .saboresbr:not(.sabores-novos), .lista-sabores { grid-template-columns: minmax(0, 1fr); }
+  .opçõesbr, #opçõescones, .saboresbr:not(.sabores-novos), .sabores-novos { padding: calc(var(--altura-header) + 20px) 16px 32px; }
+  .container { min-height: 300px; }
+  .card { min-height: 170px; }
+  .sabores-novos .produto-sabor > .imagem-sabor { height: 300px; }
+  .sabores-novos .card { padding: 24px; }
+  .resumo, .usuario { padding-inline: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  main > section { transition-duration: .01s; }
+}

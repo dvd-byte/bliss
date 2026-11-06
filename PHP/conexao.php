@@ -4,8 +4,8 @@ date_default_timezone_set("America/Sao_Paulo");
 
 $host = "127.0.0.1";
 $banco   = "bd_bliss";
-$usuario = "bliss";
-$senha = "bliss123";
+$usuario = "root";
+$senha = "";
 
 try {
 

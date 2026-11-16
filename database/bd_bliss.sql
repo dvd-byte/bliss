@@ -5,6 +5,14 @@ CREATE DATABASE IF NOT EXISTS bd_bliss
 
 USE bd_bliss;
 
+CREATE USER 'root'@'localhost'
+IDENTIFIED BY '';
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON bd_bliss.*
+TO 'root'@'localhost';
+
+FLUSH PRIVILEGES;
 -- Cria tabelas
 
 CREATE TABLE cliente (
